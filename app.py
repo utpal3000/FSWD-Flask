@@ -1,4 +1,3 @@
-
 # importing the library
 from bs4 import BeautifulSoup
 from urllib import request
