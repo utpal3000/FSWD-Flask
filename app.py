@@ -22,4 +22,6 @@ clst = tdata.split()
 eur = clst[15]
 usd = clst[11]
 
+eur = float(eur)
+usd = float(usd)
 print("USD :",usd," EUR:",eur)
