@@ -7,7 +7,7 @@ import sys
 from datetime import date
 from datetime import datetime
    
-sqliteConnection = sqlite3.connect('ex1')
+sqliteConnection = sqlite3.connect('FixedExhangeRate.db')
 cursor = sqliteConnection.cursor()
 # print("Successfully Connected to SQLite")
 
@@ -54,7 +54,7 @@ if sysdate > date_object:
 else:
     print("Updated!")
 
-    cursor.execute("INSERT INTO currate (usd, eur) values (?, ?)",(usd, eur))
+    #cursor.execute("INSERT INTO currate (usd, eur) values (?, ?)",(usd, eur))
     # # Queries to INSERT records.
 
 
