@@ -1,34 +1,24 @@
-import sqlite3
-import traceback
-import sys
+from datetime import date
+from datetime import datetime
 
-try:
-    sqliteConnection = sqlite3.connect('SQLite_Python.db')
-    cursor = sqliteConnection.cursor()
-    print("Successfully Connected to SQLite")
+datetime_str = '09.19.22 13:55:26'
 
+udate = '10.01.2023'
 
-    sqlite_create_table_query = '''CREATE TABLE fixedExRate (id INTEGER PRIMARY KEY,USD INTEGER NOT NULL,EUR INTEGER NOT NULL,LastUpDate datetime);'''
+date_str = '09-19-2022'
 
-    sqlite_insert_query = """INSERT INTO fixedExRate(id, USD, EUR, LastUpDate)  VALUES  (1, )"""
+date_object = datetime.strptime(udate, '%d.%m.%Y').date()
+# print(type(date_object))
+# print(date_object)  # printed in default format
 
-    # count = cursor.execute(sqlite_insert_query)
-    # sqliteConnection.commit()
-    # print("Record inserted successfully into SqliteDb_developers table ", cursor.rowcount)
+today = date.today()
 
-    cursor.execute(sqlite_create_table_query)
-    sqliteConnection.commit()
-    print("SQLite table created")
-    cursor.close()
+d1 = today.strftime("%d/%m/%Y")
+sysdate = datetime.strptime(d1, '%d/%m/%Y').date()
 
-except sqlite3.Error as error:
-    print("Failed to insert data into sqlite table")
-    print("Exception class is: ", error.__class__)
-    print("Exception is", error.args)
-    print('Printing detailed SQLite exception traceback: ')
-    exc_type, exc_value, exc_tb = sys.exc_info()
-    print(traceback.format_exception(exc_type, exc_value, exc_tb))
-finally:
-    if (sqliteConnection):
-        sqliteConnection.close()
-        print("The SQLite connection is closed")
+if sysdate > date_object:
+    print("Not Updated!")
+    print(sysdate)
+else:
+    print("updated!")
+    print(date_object)
