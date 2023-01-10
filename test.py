@@ -1,24 +1,34 @@
+import sqlite3
+import traceback
+import sys
 from datetime import date
 from datetime import datetime
 
-datetime_str = '09.19.22 13:55:26'
+sqliteConnection = sqlite3.connect('FixedExhangeRate.db')
+cursor = sqliteConnection.cursor()
+print("Successfully Connected to SQLite")
 
-udate = '10.01.2023'
+usd = 100
+eur = 112
+sdate = '10/01/2022'
 
-date_str = '09-19-2022'
+date = datetime.strptime(sdate, '%d/%m/%Y').date()
+# # Queries to INSERT records.
+#cursor.execute("create table currency_t(USD integer, EUR integer, Date date)")
+cursor.execute("INSERT INTO Currency_t (usd, eur, date) values (?, ?, ?)",(usd, eur, date))
 
-date_object = datetime.strptime(udate, '%d.%m.%Y').date()
-# print(type(date_object))
-# print(date_object)  # printed in default format
 
-today = date.today()
-
-d1 = today.strftime("%d/%m/%Y")
-sysdate = datetime.strptime(d1, '%d/%m/%Y').date()
-
-if sysdate > date_object:
-    print("Not Updated!")
-    print(sysdate)
-else:
-    print("updated!")
-    print(date_object)
+# cursor.execute('''INSERT INTO STUDENT VALUES ('Shyam', '8th', 'B')''')
+# cursor.execute('''INSERT INTO STUDENT VALUES ('Baburao', '9th', 'C')''')
+  
+# Display data inserted
+# print("Data Inserted in the table: ")
+# data=cursor.execute('''SELECT * FROM currate''')
+# for row in data:
+#     print(row)
+  
+# Commit your changes in the database    
+sqliteConnection.commit()
+  
+# Closing the connection
+sqliteConnection.close()
