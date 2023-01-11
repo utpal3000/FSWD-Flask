@@ -2,8 +2,6 @@
 from bs4 import BeautifulSoup
 from urllib import request
 import sqlite3
-import traceback
-import sys
 from datetime import date
 from datetime import datetime
    
@@ -48,22 +46,22 @@ eur = float(eur)
 usd = float(usd)
 print("USD :",usd," EUR:",eur)
 
-
-if sysdate > date_object:
-    print("Not Updated!")
-else:
-    print("Updated!")
-
-    #cursor.execute("INSERT INTO currate (usd, eur) values (?, ?)",(usd, eur))
-    # # Queries to INSERT records.
-
+try:
+    print("==================================")   
+    if sysdate > date_object:
+        print("Not Updated!")
+    else:
+        print("Currency Rate Updated.")
     
-    # # Queries to INSERT records.
-    #cursor.execute("create table currency_t(USD integer, EUR integer, Date date NOT NULL UNIQUE)")
-    cursor.execute("INSERT INTO Currency_t (usd, eur, date) values (?, ?, ?)",(usd, eur, udate))
+        # # Queries to INSERT records.
+        #cursor.execute("create table currency_t(USD integer, EUR integer, Date date NOT NULL UNIQUE)")
+        cursor.execute("INSERT INTO Currency_t (usd, eur, date) values (?, ?, ?)",(usd, eur, udate))
 
-    # Commit your changes in the database    
-    sqliteConnection.commit()
-        
-    # Closing the connection
-    sqliteConnection.close()
+        # Commit your changes in the database    
+        sqliteConnection.commit()
+            
+        # Closing the connection
+        sqliteConnection.close()
+        print("Updated!")
+except:
+    print("DB NOT Updated - DUPLICATES Found!")
