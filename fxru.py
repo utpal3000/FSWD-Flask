@@ -16,7 +16,7 @@ fer = BeautifulSoup(request.urlopen(url).read(),'html.parser')
  
 # Extracting data for article section
 bodyHtml = fer.find('div', {'class' : 'mb-2'})
-bodyTable = fer.find('table',{'class' : 'table'})
+bodyTable = fer.find('table', {'class' : 'table'})
  
 # Calculating result
 res = bodyHtml.get_text()
@@ -47,7 +47,8 @@ usd = float(usd)
 print("USD :",usd," EUR:",eur)
 
 try:
-    print("==================================")   
+    print("==================================")
+       
     if sysdate > date_object:
         print("Not Updated!")
     else:
