@@ -58,20 +58,23 @@ def exchange():
         if sysdate > date_object:
             print("Not Updated!")
         else:
-            print("Currency Rate Updated.")
-        
-            # # Queries to INSERT records.
-            #cursor.execute("create table currency_t(USD integer, EUR integer, Date date NOT NULL UNIQUE)")
-            cursor.execute("INSERT INTO Currency_t (usd, eur, date) values (?, ?, ?)",(usd, eur, udate))
+             print("Currency Rate Updated.")
+    
+        # # Queries to INSERT records.
+        try:
+            cursor.execute("create table currency_t(USD integer, EUR integer, Date date NOT NULL UNIQUE)")
+        except:
+            print("Table Exists")
+        cursor.execute("INSERT INTO Currency_t (usd, eur, date) values (?, ?, ?)",(usd, eur, udate))
 
-            # Commit your changes in the database    
-            sqliteConnection.commit()
-                
-            # Closing the connection
-            sqliteConnection.close()
-            print("DB Updated!")
+        # Commit your changes in the database    
+        sqliteConnection.commit()
             
-    except AttributeError:
+        # Closing the connection
+        sqliteConnection.close()
+        print("Updated!")
+            
+    except:
         print("DB NOT Updated - DUPLICATES Found!")
 
 if __name__ == "__main__":
